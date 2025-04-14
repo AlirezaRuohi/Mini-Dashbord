@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f7f9fc;
+      margin: 0;
+      padding: 2rem;
+      color: #333;
+    }
+    .dashboard {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    .card {
+      background: white;
+      border-radius: 20px;
+      margin-top: 20px;
+      padding: 1.5rem;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    }
+    .upgrade-card {
+      background: linear-gradient(135deg, #A2E3E2, #6FC5C5);
+      color: white;
+      position: relative;
+    }
+    .upgrade-card button {
+      background: #d4ff3c;
+      color: #333;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 1rem;
+    }
+    .subscriptions-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .subscriptions-table th, .subscriptions-table td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+    .badge {
+      background: #e0f2f1;
+      padding: 0.3rem 0.8rem;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard">
+    <div class="card upgrade-card">
+      <h2>Upgrade your plan today!</h2>
+      <p>100+ subscriptions available</p>
+      <div style="font-size: 2rem; font-weight: bold; margin: 1rem 0;">$15 <span style="font-size: 1rem;">/month</span></div>
+      <button>Upgrade!</button>
+    </div>
+
+    <div class="card">
+      <h3>Watching time</h3>
+      <canvas id="watchingChart"></canvas>
+    </div>
+  </div>
+
+  <div class="card" style="grid-column: span 2">
+    <h3>My subscriptions (16)</h3>
+    <table class="subscriptions-table">
+      <thead>
+        <tr>
+          <th>Platform</th>
+          <th>Price</th>
+          <th>Plan</th>
+          <th>Resolution</th>
+          <th>Next payment</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>TV+</td>
+          <td>$10</td>
+          <td><span class="badge">Basic</span></td>
+          <td>4K UHD</td>
+          <td>April 22, 2025</td>
+        </tr>
+        <tr>
+          <td>NETFLIX</td>
+          <td>$8</td>
+          <td><span class="badge">Basic</span></td>
+          <td>HD</td>
+          <td>December 10, 2024</td>
+        </tr>
+        <tr>
+          <td>Disney+</td>
+          <td>$5</td>
+          <td><span class="badge">Premium</span></td>
+          <td>Full HD</td>
+          <td>October 24, 2025</td>
+        </tr>
+        <tr>
+          <td>Spotify</td>
+          <td>$5</td>
+          <td><span class="badge">Basic</span></td>
+          <td>SD</td>
+          <td>November 30, 2024</td>
+        </tr>
+        <tr>
+          <td>YouTube</td>
+          <td>$10</td>
+          <td><span class="badge">Basic</span></td>
+          <td>HD</td>
+          <td>April 22, 2025</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <script>
+    const ctx = document.getElementById('watchingChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
+        datasets: [
+          {
+            label: 'This Week',
+            data: [2, 3, 1.5, 2, 2.7, 2.5, 3],
+            borderColor: '#a3e635',
+            fill: true,
+            backgroundColor: 'rgba(163, 230, 53, 0.2)'
+          },
+          {
+            label: 'Last Week',
+            data: [1.5, 2.5, 2, 3, 2.4, 2.9, 3.1],
+            borderColor: '#60a5fa',
+            fill: false
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top'
+          },
+        }
+      }
+    });
+  </script>
+</body>
+</html>
